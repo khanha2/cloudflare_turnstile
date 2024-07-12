@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:js' as js;
-import 'dart:ui_web' as ui;
+import 'dart:ui' as ui;
 
 import 'package:cloudflare_turnstile/src/controller/impl/turnstile_controller_web.dart';
 import 'package:cloudflare_turnstile/src/html_data.dart';
@@ -13,7 +13,8 @@ import 'package:cloudflare_turnstile/src/widget/turnstile_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CloudFlareTurnstile extends StatefulWidget implements i.CloudFlareTurnstile {
+class CloudFlareTurnstile extends StatefulWidget
+    implements i.CloudFlareTurnstile {
   /// Create a Cloudflare Turnstile Widget
   CloudFlareTurnstile({
     super.key,
@@ -153,7 +154,8 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final brightness = MediaQuery.of(context).platformBrightness;
         final isDark = brightness == Brightness.dark;
-        widget.options.theme = isDark ? TurnstileTheme.dark : TurnstileTheme.light;
+        widget.options.theme =
+            isDark ? TurnstileTheme.dark : TurnstileTheme.light;
       });
     }
 
@@ -289,7 +291,9 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
   String _embedWebIframeJsConnector(String source, String windowDisambiguator) {
     return _embedJsInHtmlSource(
       source,
-      {'parent.$_jsToDartConnectorFN$windowDisambiguator && parent.$_jsToDartConnectorFN$windowDisambiguator(window)'},
+      {
+        'parent.$_jsToDartConnectorFN$windowDisambiguator && parent.$_jsToDartConnectorFN$windowDisambiguator(window)'
+      },
     );
   }
 
@@ -304,7 +308,13 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
       (prev, elem) => prev + newLine * 2 + elem,
     );
 
-    final whatToEmbed = newLine + scriptOpenTag + newLine + jsContent + newLine + scriptCloseTag + newLine;
+    final whatToEmbed = newLine +
+        scriptOpenTag +
+        newLine +
+        jsContent +
+        newLine +
+        scriptCloseTag +
+        newLine;
 
     final indexToSplit = source.indexOf('</head>');
     final splitSource1 = source.substring(0, indexToSplit);
