@@ -68,7 +68,6 @@ String _source = """
 </head>
 
 <body>
-   '<TURNSTILE_CUSTOM_HTML>'
    <div id="cf-turnstile"></div>
    <script>
       turnstile.ready(function () {
