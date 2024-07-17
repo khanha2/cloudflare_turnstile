@@ -183,7 +183,8 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
       ..width = widget.options.size.width.toString()
       ..height = widget.options.size.height.toString()
       ..style.width = '100%'
-      ..style.height = '100%';
+      ..style.height = '100%'
+      ..src = widget.baseUrl;
 
     return iframeElement;
   }
