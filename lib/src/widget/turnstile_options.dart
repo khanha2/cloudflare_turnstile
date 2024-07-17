@@ -9,20 +9,25 @@ class TurnstileOptions {
     this.retryAutomatically = true,
     this.refreshExpired = TurnstileRefreshExpired.auto,
     this.refreshTimeout = TurnstileRefreshTimeout.auto,
+    this.customHtml = '',
   })  : assert(
-          retryInterval.inMilliseconds > 0 && retryInterval.inMilliseconds <= 900000,
+          retryInterval.inMilliseconds > 0 &&
+              retryInterval.inMilliseconds <= 900000,
           'Duration must be greater than 0 and less than or equal to 900000 milliseconds.',
         ),
         assert(
-          !(mode == TurnstileMode.invisible && refreshExpired == TurnstileRefreshExpired.manual),
+          !(mode == TurnstileMode.invisible &&
+              refreshExpired == TurnstileRefreshExpired.manual),
           '$refreshExpired is impossible in $mode, consider using TurnstileRefreshExpired.auto or TurnstileRefreshExpired.never',
         ),
         assert(
-          !(mode == TurnstileMode.invisible && refreshTimeout != TurnstileRefreshTimeout.auto),
+          !(mode == TurnstileMode.invisible &&
+              refreshTimeout != TurnstileRefreshTimeout.auto),
           '$refreshTimeout has no effect on an $mode widget.',
         ),
         assert(
-          !(mode == TurnstileMode.nonInteractive && refreshTimeout != TurnstileRefreshTimeout.auto),
+          !(mode == TurnstileMode.nonInteractive &&
+              refreshTimeout != TurnstileRefreshTimeout.auto),
           '$refreshTimeout has no effect on an $mode widget.',
         );
 
@@ -64,6 +69,11 @@ class TurnstileOptions {
   ///
   /// Refer to [list of supported languages](https://developers.cloudflare.com/turnstile/reference/supported-languages/) for more infrmation.
   final String language;
+
+  /// Custom HTML to be displayed in the widget.
+  ///
+  ///  A custom HTML of the widget for Flutter Web
+  final String customHtml;
 
   /// The widget theme
   ///
