@@ -15,19 +15,18 @@ import 'package:flutter/material.dart';
 class CloudFlareTurnstile extends StatefulWidget
     implements i.CloudFlareTurnstile {
   /// Create a Cloudflare Turnstile Widget
-  CloudFlareTurnstile(
-      {super.key,
-      required this.siteKey,
-      this.action,
-      this.cData,
-      this.baseUrl = 'http://localhost/',
-      TurnstileOptions? options,
-      this.controller,
-      this.onTokenRecived,
-      this.onTokenExpired,
-      this.onError,
-      this.customHtml})
-      : options = options ?? TurnstileOptions() {
+  CloudFlareTurnstile({
+    super.key,
+    required this.siteKey,
+    this.action,
+    this.cData,
+    this.baseUrl = 'http://localhost/',
+    TurnstileOptions? options,
+    this.controller,
+    this.onTokenRecived,
+    this.onTokenExpired,
+    this.onError,
+  }) : options = options ?? TurnstileOptions() {
     if (action != null) {
       assert(
         action!.length <= 32 && RegExp(r'^[a-zA-Z0-9_-]*$').hasMatch(action!),
@@ -67,10 +66,6 @@ class CloudFlareTurnstile extends StatefulWidget
   /// A base url of turnstile Site
   @override
   final String baseUrl;
-
-// A custom HTML of the widget for Flutter Web
-  @override
-  final String? customHtml;
 
   /// A Turnstile widget options
   @override
@@ -287,7 +282,7 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
           onTurnstileError: _errorJSHandler,
           onTokenExpired: _tokenExpiredJSHandler,
           onWidgetCreated: _widgetCreatedJSHandler,
-          customHtml: widget.customHtml),
+          customHtml: widget.options.customHtml),
       iframeViewType,
     );
   }
