@@ -11,23 +11,23 @@ import 'package:cloudflare_turnstile/src/html_data.dart';
 import 'package:cloudflare_turnstile/src/widget/interface.dart' as i;
 import 'package:cloudflare_turnstile/src/widget/turnstile_options.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CloudFlareTurnstile extends StatefulWidget
     implements i.CloudFlareTurnstile {
   /// Create a Cloudflare Turnstile Widget
-  CloudFlareTurnstile({
-    super.key,
-    required this.siteKey,
-    this.action,
-    this.cData,
-    this.baseUrl = 'http://localhost/',
-    TurnstileOptions? options,
-    this.controller,
-    this.onTokenRecived,
-    this.onTokenExpired,
-    this.onError,
-  }) : options = options ?? TurnstileOptions() {
+  CloudFlareTurnstile(
+      {super.key,
+      required this.siteKey,
+      this.action,
+      this.cData,
+      this.baseUrl = 'http://localhost/',
+      TurnstileOptions? options,
+      this.controller,
+      this.onTokenRecived,
+      this.onTokenExpired,
+      this.onError,
+      this.customHtml})
+      : options = options ?? TurnstileOptions() {
     if (action != null) {
       assert(
         action!.length <= 32 && RegExp(r'^[a-zA-Z0-9_-]*$').hasMatch(action!),
@@ -67,6 +67,10 @@ class CloudFlareTurnstile extends StatefulWidget
   /// A base url of turnstile Site
   @override
   final String baseUrl;
+
+// A custom HTML of the widget for Flutter Web
+  @override
+  final String? customHtml;
 
   /// A Turnstile widget options
   @override
@@ -275,15 +279,15 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
   void _updateSource() {
     iframe.srcdoc = _embedWebIframeJsConnector(
       htmlData(
-        siteKey: widget.siteKey,
-        action: widget.action,
-        cData: widget.cData,
-        options: widget.options,
-        onTokenRecived: _tokenRecivedJSHandler,
-        onTurnstileError: _errorJSHandler,
-        onTokenExpired: _tokenExpiredJSHandler,
-        onWidgetCreated: _widgetCreatedJSHandler,
-      ),
+          siteKey: widget.siteKey,
+          action: widget.action,
+          cData: widget.cData,
+          options: widget.options,
+          onTokenRecived: _tokenRecivedJSHandler,
+          onTurnstileError: _errorJSHandler,
+          onTokenExpired: _tokenExpiredJSHandler,
+          onWidgetCreated: _widgetCreatedJSHandler,
+          customHtml: widget.customHtml),
       iframeViewType,
     );
   }
