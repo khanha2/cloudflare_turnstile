@@ -10,10 +10,9 @@ String htmlData({
   required String onWidgetCreated,
   String? action,
   String? cData,
-  String? customHtml,
 }) {
   final exp = RegExp(
-    '<TURNSTILE_(SITE_KEY|ACTION|CDATA|THEME|SIZE|LANGUAGE|RETRY|RETRY_INTERVAL|REFRESH_EXPIRED|REFRESH_TIMEOUT|READY|TOKEN_RECIVED|ERROR|TOKEN_EXPIRED|CREATED|CUSTOM_HTML)>',
+    '<TURNSTILE_(SITE_KEY|ACTION|CDATA|THEME|SIZE|LANGUAGE|RETRY|RETRY_INTERVAL|REFRESH_EXPIRED|REFRESH_TIMEOUT|READY|TOKEN_RECIVED|ERROR|TOKEN_EXPIRED|CREATED)>',
   );
 
   final replacedText = _source.replaceAllMapped(exp, (match) {
@@ -46,8 +45,6 @@ String htmlData({
         return onTokenExpired;
       case 'CREATED':
         return onWidgetCreated;
-      case 'CUSTOM_HTML':
-        return customHtml ?? '';
       default:
         return match.group(0) ?? '';
     }

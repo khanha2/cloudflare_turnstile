@@ -274,15 +274,15 @@ class _CloudFlareTurnstileState extends State<CloudFlareTurnstile> {
   void _updateSource() {
     iframe.srcdoc = _embedWebIframeJsConnector(
       htmlData(
-          siteKey: widget.siteKey,
-          action: widget.action,
-          cData: widget.cData,
-          options: widget.options,
-          onTokenRecived: _tokenRecivedJSHandler,
-          onTurnstileError: _errorJSHandler,
-          onTokenExpired: _tokenExpiredJSHandler,
-          onWidgetCreated: _widgetCreatedJSHandler,
-          customHtml: widget.options.customHtml),
+        siteKey: widget.siteKey,
+        action: widget.action,
+        cData: widget.cData,
+        options: widget.options,
+        onTokenRecived: _tokenRecivedJSHandler,
+        onTurnstileError: _errorJSHandler,
+        onTokenExpired: _tokenExpiredJSHandler,
+        onWidgetCreated: _widgetCreatedJSHandler,
+      ),
       iframeViewType,
     );
   }
